@@ -1,0 +1,63 @@
+---
+title: "Developing Data Products Week 2 Assignment"
+author: "Daisy Wu"
+date: "2018年3月28日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Instructions
+Create a web page using R Markdown that features a map created with leaflet
+
+Host your webpage on either GitHub Pages, RPubs, or NeoCities.
+
+Your webpage must contain the data that you created the document, and it must contain a map created with Leaflet. We would love to see you show off your creativity!
+
+## Review criteria
+The rubric contains the following two questions:
+ 1. Does the web page feature a date and is this date less than two months before the date that you're garding this assignment?
+ 2. Does the Web page feature an interactive map that appears to have been created with Leaflet?
+ 
+
+## Submission
+
+Here is the Danei Market, Totoro bus stop, Danei District, CPC and 7-Eleven store 
+Some of the visiting location in Dainei, Tainan of Taiwan
+
+```{r}
+library(knitr)
+library(leaflet)
+library(dplyr)
+```
+
+```{r}
+m <- leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lat=23.118851, lng=120.358230, popup="Danei Market") %>%
+  addMarkers(lat=23.124255,lng=120.356067, popup="Totoro bus stop") %>%
+  addMarkers(lat=23.118995,lng=120.360268, popup="Danei District") %>%
+  addMarkers(lat=23.121305,lng=120.354849, popup="CPC") %>%
+  addMarkers(lat=23.119312,lng=120.356262, popup="7-Eleven") #%>%
+  
+  
+m  # Print the map
+```
+
+# Mapping Clusters
+When you zoom in to each cluster, the cluster will seperate until you see the individual Markers
+
+```{r}
+df <- data.frame(lat=runif(500, min=23.10, max=23.13),
+                 lng=runif(500, min=120.35, max=120.37))
+```
+
+```{r}
+df %>%
+leaflet() %>%
+addTiles() %>%  
+addMarkers(clusterOptions = markerClusterOptions())  
+```
+
